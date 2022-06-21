@@ -1,8 +1,10 @@
 import React from 'react'
-
+import DeleteFlightForm from './DeleteFlightForm'
 function DeleteFlight() {
   return (
-    <div>DeleteFlight</div>
+    <div>
+      <DeleteFlightForm/>
+    </div>
   )
 }
 
