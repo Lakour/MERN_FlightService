@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <div>
-      {/* <Flights/> */}
+      <Flights/>
       </div>
   )
 }
