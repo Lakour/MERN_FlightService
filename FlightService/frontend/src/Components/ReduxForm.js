@@ -3,10 +3,11 @@ import { Field, reduxForm } from "redux-form";
 
 class ReduxForm extends React.Component {
   renderInput = formProps => {
+  
     const className = `field ${formProps.meta.error && formProps.meta.touched
       ? formProps.meta.error
       : " "}`;
-    // console.log(formProps.meta.error);
+    console.log(formProps);
     return (
       <div className={className}>
         <label>
@@ -53,6 +54,7 @@ class ReduxForm extends React.Component {
           {/* requird props are name and component */}
           <Field
             name="flightNumber"
+            // component is needed to render the actual field
             component={this.renderInput}
             label="Flight Number"
           />
@@ -87,13 +89,13 @@ class ReduxForm extends React.Component {
             label="Arrival Airport"
           />
           <Field
-            name="passangers"
+            name="passengers"
             component={this.renderInput}
             label="Number of Passangers"
             type="number"
           />
           <Field
-            name="passangerLimit"
+            name="passengerLimit"
             component={this.renderInput}
             label="Passanger Limit"
             type="number"
@@ -132,15 +134,15 @@ const validate = formValues => {
   if (!formValues.arrivalAirport) {
     errors.arrivalAirport = "You must enter an arrival airport";
   }
-  if (!formValues.passangers) {
-    errors.passangers = "You must enter the number of passangers";
+  if (!formValues.passengers) {
+    errors.passengers = "You must enter the number of passengers";
   }
-  if (!formValues.passangerLimit) {
-    errors.passangerLimit = "You must enter a passanger limit";
+  if (!formValues.passengerLimit) {
+    errors.passengerLimit = "You must enter a passanger limit";
 
   }
-  if(Number(formValues.passangers) > Number(formValues.passangerLimit)){
-   errors.passangerLimit = "You exceeded the maximum number of passangers";
+  if(Number(formValues.passengers) > Number(formValues.passengerLimit)){
+   errors.passengerLimit = "You exceeded the maximum number of passengers";
   }
 
   return errors;
