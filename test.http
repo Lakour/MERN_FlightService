@@ -1,0 +1,36 @@
+POST http://localhost:8080/flight/create-flight
+content-type: application/json
+
+{
+  "flightNumber": "444",
+   "departureDate":"2022-6-23",
+  "arrivalDate" : "2022-6-3",
+  "departureTime": "13.22",
+  "arrivalTime": "16.33",
+  "departureAirport": "Hawaii",
+  "arrivalAirport" : "Minneapolis" ,
+  "passengers": "333",
+  "passengerLimit": "345"
+}
+
+###
+PUT  http://localhost:8080/flight/update-flight/866
+content-type: application/json
+
+ {
+  "key":"departureTime",
+  "value": "13.47"
+ }
+
+###
+DELETE http://localhost:8080/flight/delete-flight/910
+
+###
+
+GET http://localhost:8080/flight
+
+###
+GET http://localhost:8080/flight/838
+
+
+
