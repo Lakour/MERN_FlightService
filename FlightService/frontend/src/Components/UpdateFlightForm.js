@@ -4,8 +4,25 @@ import { Field, reduxForm } from "redux-form";
  const UpdateFlightForm = (props)=>{
   
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    console.log(formValues.property, formValues.propertyUpdate);
   };
+
+  const renderInput = (formProps)=>{
+    return(
+      <div className='field'>
+      <label>
+        {formProps.label}
+      </label>
+      <input
+        type="text"
+        value={formProps.input.value}
+        onChange={formProps.input.onChange}
+        autoComplete="off"
+      />
+      {/* {this.renderError(formProps.meta)} */}
+    </div>
+    )
+  }
   
 
     return (
@@ -30,7 +47,9 @@ import { Field, reduxForm } from "redux-form";
             <option value="passengers">Number of Passengers</option>
             <option value="passengerLimit">Passenger Limit</option>
           </Field>
-          <Field name="propertyUpdate"></Field>
+          <Field name="propertyUpdate" component={renderInput} label="Update Flight">
+
+          </Field>
       
         <br />
         <button className="ui button primary">Submit</button>

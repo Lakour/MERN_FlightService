@@ -1,14 +1,11 @@
 import React from 'react'
-import Flights from "./Flights";
-import ReduxForm from "./ReduxForm";
+// import Flights from "./Flights";
 
 function Home() {
 
-
-
   return (
     <div>
-      <Flights/>
+      {/* <Flights/> */}
       </div>
   )
 }

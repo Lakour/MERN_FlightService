@@ -1,8 +1,8 @@
 import React from 'react'
-
+import UpdateFlightForm from './UpdateFlightForm'
 function UpdateFlight() {
   return (
-    <div>UpdateFlight</div>
+    <UpdateFlightForm/>
   )
 }
 

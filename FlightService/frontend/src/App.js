@@ -12,7 +12,7 @@ import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import CreateFlight from './Components/CreateFlight';
 import DeleteFlight from './Components/DeleteFlight';
-import ShowFlights from './Components/FlightList';
+import Flights from './Components/Flights';
 import UpdateFlight from './Components/UpdateFlight';
 import MyContext, {contexts} from './contexts/MyContext'
 
@@ -49,7 +49,7 @@ function App() {
     <Route exact path='/create' element={<CreateFlight/>}></Route>
     <Route exact path='/update' element={<UpdateFlight/>}></Route>
     <Route exact path='/delete' element={<DeleteFlight/>}></Route>
-  <Route exact path='/show' element={<ShowFlights/>}></Route> 
+  <Route exact path='/show' element={<Flights/>}></Route> 
      {/* <Route path='*' element={<Error/>}></Route> */}
   
     </Routes>

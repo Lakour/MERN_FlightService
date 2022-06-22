@@ -4,6 +4,7 @@ function ShowFlights(props) {
   // console.log(props.list)
 
   function renderList() {
+    console.log(props.list)
     return props.list.map(flight => {
       return (
         <div className="item" key={flight._id}>
