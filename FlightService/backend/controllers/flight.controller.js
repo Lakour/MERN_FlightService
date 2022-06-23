@@ -63,7 +63,7 @@ const deleteFlight = async id => {
 };
 
 updateFlight = async (flightIdNumber, { key, value }) => {
-  //pass parameters we want to update
+
   const filter = {
     flightId: flightIdNumber
   };
@@ -71,7 +71,6 @@ updateFlight = async (flightIdNumber, { key, value }) => {
     [key]: value
   };
   console.log(update);
-
   try {
     const flight = await Flight.findOneAndUpdate(filter, update, { new: true });
     return flight;

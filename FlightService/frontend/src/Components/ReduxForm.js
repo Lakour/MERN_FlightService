@@ -2,8 +2,8 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 class ReduxForm extends React.Component {
+
   renderInput = formProps => {
-  
     const className = `field ${formProps.meta.error && formProps.meta.touched
       ? formProps.meta.error
       : " "}`;
@@ -14,6 +14,7 @@ class ReduxForm extends React.Component {
           {formProps.label}
         </label>
         <input
+        className=""
           type="text"
           value={formProps.input.value}
           onChange={formProps.input.onChange}
@@ -23,6 +24,31 @@ class ReduxForm extends React.Component {
       </div>
     );
   };
+
+  renderDateAndTimeInput = (formProps)=>{
+    const className = `field ${formProps.meta.error && formProps.meta.touched
+      ? formProps.meta.error
+      : " "}`;
+    return (
+      <div className={className}>
+        <label>
+          {formProps.label}
+        </label>
+        <input type="datetime-local"
+          value={formProps.input.value}
+          onChange={formProps.input.onChange}
+          autoComplete="off"
+        />
+        {/* <input
+          type="text"
+          value={formProps.input.value}
+          onChange={formProps.input.onChange}
+          autoComplete="off"
+        /> */}
+        {this.renderError(formProps.meta)}
+      </div>
+    );
+  }
 
   renderError({ error, touched }) {
     if (touched && error) {
@@ -36,12 +62,14 @@ class ReduxForm extends React.Component {
     }
   }
 
+  //formValues object with all our values
   onSubmit(formValues) {
     //make a call to the backend
     console.log(formValues);
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         {/* handleSubmit is a callback fcn provided by redux-form 
@@ -60,12 +88,12 @@ class ReduxForm extends React.Component {
           />
           <Field
             name="departureDate"
-            component={this.renderInput}
+            component={this.renderDateAndTimeInput}
             label="Departure Date"
           />
           <Field
             name="arrivalDate"
-            component={this.renderInput}
+            component={this.renderDateAndTimeInput}
             label="Arrival Date"
           />
           <Field

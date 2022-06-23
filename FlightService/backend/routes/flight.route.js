@@ -40,9 +40,10 @@ router.delete('/delete-flight/:id', async(req,res)=>{
   }
 })
 
-router.put('/update-flight/:id', async (req,res)=>{
+router.patch('/update-flight/:id', async (req,res)=>{
   const flightId = Number(req.params.id);
   const update = req.body;
+
   try{
    const flight = await flightController.updateFlight(flightId,update)
    res.status(200).json(`Flight's ${update.key} has been updated to ${flight[update.key]}`)
