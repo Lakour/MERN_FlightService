@@ -13,7 +13,6 @@ function Flights(props) {
   useEffect(()=>{
   const fetchData = async () =>{
     const flights = await axios.get('http://localhost:8080/flight')
-    console.log(flights.data)
     setFlightList(flights.data)
   }
   fetchData()

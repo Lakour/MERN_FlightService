@@ -14,11 +14,12 @@ import CreateFlight from './Components/CreateFlight';
 import DeleteFlight from './Components/DeleteFlight';
 import Flights from './Components/Flights';
 import UpdateFlight from './Components/UpdateFlight';
+import FlightById from "./Components/FlightById";
 import MyContext, {contexts} from './contexts/MyContext'
 
 function App() {
   // const [visible, setVisible] = useState(true);
-  const [flights, setFlights] = useState([]);
+  // const [flights, setFlights] = useState([]);
   // const [currTheme, setCurrentTheme] = useState(contexts.light)
 
 
@@ -38,20 +39,23 @@ function App() {
   return (
     // <MyContext.Provider value={currTheme}>
     <>
-     
     <BrowserRouter>
    
      <Navbar 
-     navItemOne="Create A Flight" navItemTwo="Show All Flights" navItemThree="Update A Flight" navItemFour="Delete A Flight"
+     navItemOne="Create A Flight" 
+     navItemTwo="Show All Flights" 
+     navItemThree="Update A Flight"
+      navItemFour="Delete A Flight"
+     navItemFive="Show Flight By Id"
      />
+
     <Routes>
     <Route exact path='/' element={<Home/>}></Route>
     <Route exact path='/create' element={<CreateFlight/>}></Route>
     <Route exact path='/update' element={<UpdateFlight/>}></Route>
     <Route exact path='/delete' element={<DeleteFlight/>}></Route>
-  <Route exact path='/show' element={<Flights/>}></Route> 
-     {/* <Route path='*' element={<Error/>}></Route> */}
-  
+    <Route exact path="/show-flight" element={<FlightById/>}></Route>
+    <Route exact path='/show' element={<Flights/>}></Route>   
     </Routes>
      {/* <button onClick={changeThemes}>Theme</button>  */}
     </BrowserRouter> 

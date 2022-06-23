@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ShowFlights(props) {
   // console.log(props.list)
@@ -7,7 +8,7 @@ function ShowFlights(props) {
     console.log(props.list)
     return props.list.map(flight => {
       return (
-        <div className="item" key={flight._id}>
+        <div className="ui container" key={flight._id}>
           <i className="small middle alligned plane icon" />
           <label>Flight ID: </label>
           <span>
@@ -23,6 +24,7 @@ function ShowFlights(props) {
             <span>
               {flight.departureAirport}
             </span>
+            <Link className="mini ui red button" to='/delete' state={{id: flight.flightId}} >Delete</Link>
           </div>
         </div>
       );

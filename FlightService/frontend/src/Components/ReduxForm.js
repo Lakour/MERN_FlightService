@@ -7,7 +7,6 @@ class ReduxForm extends React.Component {
     const className = `field ${formProps.meta.error && formProps.meta.touched
       ? formProps.meta.error
       : " "}`;
-    console.log(formProps);
     return (
       <div className={className}>
         <label>
@@ -18,7 +17,7 @@ class ReduxForm extends React.Component {
           type="text"
           value={formProps.input.value}
           onChange={formProps.input.onChange}
-          autoComplete="off"
+          // autoComplete="off"
         />
         {this.renderError(formProps.meta)}
       </div>
@@ -51,6 +50,8 @@ class ReduxForm extends React.Component {
   }
 
   renderError({ error, touched }) {
+    // console.log(error, touched)
+
     if (touched && error) {
       return (
         <div className="ui error message">
@@ -62,27 +63,29 @@ class ReduxForm extends React.Component {
     }
   }
 
-  //formValues object with all our values
+  //^formValues, object with all our values from the inputs
   onSubmit(formValues) {
-    //make a call to the backend
+
+    //after new flight is created navigate to home page
     console.log(formValues);
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
-        {/* handleSubmit is a callback fcn provided by redux-form 
-        it automatically handles e.preventDefault()
+        {/* handleSubmit is a fcn. from redux-form 
+       automatically handles e.preventDefault()
         */}
         <form
+        //^this.props is auto provided by redux-form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
           className="ui form error"
         >
           {/* requird props are name and component */}
           <Field
             name="flightNumber"
-            // component is needed to render the actual field
+            // ^component is needed to render the actual input
             component={this.renderInput}
             label="Flight Number"
           />
@@ -169,6 +172,7 @@ const validate = formValues => {
     errors.passengerLimit = "You must enter a passanger limit";
 
   }
+
   if(Number(formValues.passengers) > Number(formValues.passengerLimit)){
    errors.passengerLimit = "You exceeded the maximum number of passengers";
   }

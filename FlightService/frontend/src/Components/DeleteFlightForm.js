@@ -10,8 +10,9 @@ const renderInput = (formProps) =>{
         {formProps.label}
       </label>
       <input
+      // placeholder={props.flightId}
         type="text"
-        value={formProps.input.value}
+        value={props.flightId}
         onChange={formProps.input.onChange}
         autoComplete="off"
       />
