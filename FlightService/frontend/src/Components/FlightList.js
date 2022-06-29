@@ -2,30 +2,78 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function ShowFlights(props) {
-  // console.log(props.list)
-
   function renderList() {
-    console.log(props.list)
+    // console.log(props.list);
     return props.list.map(flight => {
       return (
         <div className="ui container" key={flight._id}>
-          <i className="small middle alligned plane icon" />
-          <label>Flight ID: </label>
-          <span>
-            {flight.flightId}
-          </span>
-          <div className="content">
-            <label>Arrival Airport: </label>
-            <span>
-              {flight.arrivalAirport}
-            </span>
-            <div></div>
-            <label>Departure Airport: </label>
-            <span>
-              {flight.departureAirport}
-            </span>
-            <Link className="mini ui red button" to='/delete' state={{id: flight.flightId}} >Delete</Link>
-          </div>
+          <h4 className="ui horizontal divider header">
+            <i className="small middle alligned plane icon" />
+            Flight
+          </h4>
+          <table className="ui definition table">
+            <tbody>
+              <tr>
+                <td className="two wide column">Fligth Number</td>
+                <td>
+                  {" "}{flight.flightNumber}
+                </td>
+              </tr>
+              <tr>
+                <td>Arrival Airport</td>
+                <td>
+                  {" "}{flight.arrivalAirport}
+                </td>
+              </tr>
+              <tr>
+                <td>Departure Airport</td>
+                <td>
+                  {flight.departureAirport}
+                </td>
+              </tr>
+              <tr>
+                <td>Arrival Time</td>
+                <td>
+                  {flight.arrivalTime}
+                </td>
+              </tr>
+              <tr>
+                <td>Departure Time</td>
+                <td>
+                  {flight.arrivalTime}
+                </td>
+              </tr>
+              <tr>
+                <td>Number of Passangers</td>
+                <td>
+                  {flight.passengers}
+                </td>
+              </tr>
+              <tr>
+                <td>Max Passanger Limit</td>
+                <td>
+                  {flight.passengerLimit}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="edit-flight">
+          <Link
+            className="mini ui red button"
+            to="/delete"
+            state={{ id: flight.flightId }}
+            >
+            <i className="delete icon" />
+          </Link>
+          <Link
+            className="mini ui yellow button"
+            to="/update"
+            state={{ id: flight.flightId }}
+            >
+            <i className="edit icon" />
+          </Link>
+            </div>
+
         </div>
       );
     });

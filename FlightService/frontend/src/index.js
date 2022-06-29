@@ -6,6 +6,12 @@ import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit'
 import reducers from './reducers/index'
+// import dotenv from 'dotenv';
+
+// import 'dotenv/config';
+// dotenv.config({ path: path.join(__dirname, '../.env.example') });
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = configureStore({reducer: reducers});

@@ -4,9 +4,13 @@ import React from 'react'
 function Home() {
 
   return (
-    <div>
-      {/* <Flights/> */}
-      </div>
+    <div className="ui placeholder segment">
+    <div className="ui icon header">
+      <i className="home icon"></i>
+    Sign In To Access Flights
+    </div>
+    {/* <div className="ui primary button">Add Document</div> */}
+  </div>
   )
 }
 

@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+.field  {
+  padding: 10px;
+}
+#btn{
+  margin: 10px;
+}
+
+.menu{
+padding: 3px;
+}
+
+.edit-flight{
+  display: flex;
+  justify-content: flex-end;
+  /* align-items: flex-start; */
+}
+
+

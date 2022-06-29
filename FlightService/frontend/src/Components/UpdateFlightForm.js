@@ -3,10 +3,35 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 const UpdateFlightForm = props => {
+  // console.log( props.flightId );
   const onSubmit = formValues => {
-    console.log(formValues.flightId, formValues.property, formValues.propertyUpdate);
-    axios.patch(`http://localhost:8080/flight/update-flight/${formValues.flightId}`,
-    {key: formValues.property, value: formValues.propertyUpdate})
+    // console.log(props.flightId? props.flightId : formValues.flightId);
+    // console.log( formValues.property, formValues.propertyUpdate)
+    // console.log( props.flightId ?  props.flightId: formValues.flightId);
+
+    axios.patch(
+      `http://localhost:8080/flight/update-flight/${props.flightId
+        ? props.flightId
+        : formValues.flightId}`,
+      { key: formValues.property, value: formValues.propertyUpdate }
+    );
+  };
+
+  const renderInputForId = formProps => {
+    return (
+      <div className="field">
+        <label>
+          {formProps.label}
+        </label>
+        <input
+          type="text"
+          // value={formProps.input.value}
+          onChange={formProps.input.onChange}
+          autoComplete="off"
+          value={props.flightId ? props.flightId : formProps.input.value}
+        />
+      </div>
+    );
   };
 
   const renderInput = formProps => {
@@ -17,26 +42,31 @@ const UpdateFlightForm = props => {
         </label>
         <input
           type="text"
-          value={formProps.input.value}
+          // value={formProps.input.value}
           onChange={formProps.input.onChange}
           autoComplete="off"
+          value={formProps.input.value}
         />
       </div>
     );
   };
 
   return (
-    <div>
+    <div  className="field">
       {/* handleSubmit is a callback fcn provided by redux-form 
       it automatically handles e.preventDefault()
       */}
       <form onSubmit={props.handleSubmit(onSubmit)} className="ui form error">
         <Field
           name="flightId"
-          component={renderInput}
-          label="Enter Flight ID"
+          component={renderInputForId}
+          label="Flight ID"
         />
-        <Field name="property" component="select" label="Pick From The List">
+        <Field
+          name="property"
+          component="select"
+          label="Pick From The List"
+        >
           <option />
           <option value="flightNumber">Flight Number</option>
           <option value="departureDate">Departure Date</option>
@@ -54,7 +84,7 @@ const UpdateFlightForm = props => {
           label="Enter New Info"
         />
         <br />
-        <button className="ui button primary">Submit</button>
+        <button  id="btn" className="ui button primary">Submit</button>
       </form>
     </div>
   );

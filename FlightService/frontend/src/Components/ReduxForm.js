@@ -1,35 +1,60 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import {Link} from 'react-router-dom';
+import Flights from './Flights';
+import axios from "axios";
 
 class ReduxForm extends React.Component {
+
+  state = {redirect: false};
+  // componentWillUnmount(){
+  //   console.log("unmounting")
+  //   if(this.props.submitFailed){
+  //     this.setState({redirect: true})
+  //   }
+
+  //   }
+  
+    componentDidUpdate(){
+      console.log(this.props.submitFailed)
+
+      // if(this.props.submitFailed){
+      //   this.setState({redirect: true})
+      // }
+    }
+    componentDidMount(){
+      // console.log(this.props.submitFailed)
+
+      this.setState({redirect: false});
+  }
 
   renderInput = formProps => {
     const className = `field ${formProps.meta.error && formProps.meta.touched
       ? formProps.meta.error
       : " "}`;
-    return (
-      <div className={className}>
+      return (
+        <div className={className}>
         <label>
           {formProps.label}
         </label>
         <input
         className=""
-          type="text"
-          value={formProps.input.value}
-          onChange={formProps.input.onChange}
-          // autoComplete="off"
+        type="text"
+        value={formProps.input.value}
+        onChange={formProps.input.onChange}
+        // autoComplete="off"
         />
         {this.renderError(formProps.meta)}
       </div>
     );
   };
-
+  
   renderDateAndTimeInput = (formProps)=>{
     const className = `field ${formProps.meta.error && formProps.meta.touched
       ? formProps.meta.error
       : " "}`;
-    return (
-      <div className={className}>
+      return (
+        <div className={className}>
         <label>
           {formProps.label}
         </label>
@@ -37,21 +62,15 @@ class ReduxForm extends React.Component {
           value={formProps.input.value}
           onChange={formProps.input.onChange}
           autoComplete="off"
-        />
-        {/* <input
-          type="text"
-          value={formProps.input.value}
-          onChange={formProps.input.onChange}
-          autoComplete="off"
-        /> */}
+          />
         {this.renderError(formProps.meta)}
       </div>
     );
   }
-
+  
   renderError({ error, touched }) {
     // console.log(error, touched)
-
+    
     if (touched && error) {
       return (
         <div className="ui error message">
@@ -63,20 +82,27 @@ class ReduxForm extends React.Component {
     }
   }
 
+
   //^formValues, object with all our values from the inputs
   onSubmit(formValues) {
+        console.log(formValues)
+        if(this.props.submitFailed){
+          this.setState({redirect: true})
+        }
+    // axios.post('http://localhost:8080/flight/create-flight', formValues)
 
     //after new flight is created navigate to home page
-    console.log(formValues);
-  }
 
+  }
+  
   render() {
-    // console.log(this.props)
+
     return (
       <div>
-        {/* handleSubmit is a fcn. from redux-form 
-       automatically handles e.preventDefault()
-        */}
+     {this.state.redirect ? 
+     <Flights/> 
+      :
+      <div>
         <form
         //^this.props is auto provided by redux-form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
@@ -132,10 +158,11 @@ class ReduxForm extends React.Component {
             type="number"
 
           />
-
           <br />
-          <button className="ui button primary">Submit</button>
+          <button  id="btn" className="ui button primary">Submit</button>
         </form>
+        </div>
+       }
       </div>
     );
   }

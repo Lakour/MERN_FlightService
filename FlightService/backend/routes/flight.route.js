@@ -22,6 +22,7 @@ router.get('/:id', async (req,res)=>{
 })
 
 router.post('/create-flight',async (req, res)=>{
+  console.log(req.body)
   try{
     const flightId =  await flightController.createFlight(req.body)
     res.status(201).json(`New flight has been created with flight id: ${flightId}`)

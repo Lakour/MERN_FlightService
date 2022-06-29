@@ -2,6 +2,7 @@ const Flight = require("../Models/Flight");
 require("../db/mongoose");
 
 getFlightById = async flightId => {
+
   try {
     const flight = await Flight.findOne({ flightId: flightId });
     return flight;
@@ -63,14 +64,13 @@ const deleteFlight = async id => {
 };
 
 updateFlight = async (flightIdNumber, { key, value }) => {
-
+console.log(flightIdNumber, key, value)
   const filter = {
     flightId: flightIdNumber
   };
   const update = {
     [key]: value
   };
-  console.log(update);
   try {
     const flight = await Flight.findOneAndUpdate(filter, update, { new: true });
     return flight;

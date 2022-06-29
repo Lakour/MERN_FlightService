@@ -12,7 +12,7 @@ const renderInput = (formProps) =>{
       <input
       // placeholder={props.flightId}
         type="text"
-        value={props.flightId}
+        value={props.flightId? props.flightId: formProps.input.value}
         onChange={formProps.input.onChange}
         autoComplete="off"
       />
@@ -22,8 +22,9 @@ const renderInput = (formProps) =>{
 }
 
   const onSubmit = (formValues) => {
-    console.log(formValues.flightId);
-    // axios.delete(`http://localhost:8080/flight/delete-flight/${formValues.flightId}`)
+  
+    console.log( props.flightId ?  props.flightId: formValues.flightId);
+    axios.delete(`http://localhost:8080/flight/delete-flight/${ props.flightId ?  props.flightId: formValues.flightId}`)
   };
   
 
@@ -41,7 +42,7 @@ const renderInput = (formProps) =>{
             label="Enter Flight Id"
           />
       
-        <button className="ui button primary">Submit</button>
+        <button id="btn" className="ui button primary">Submit</button>
       </form>
     </div>
     );

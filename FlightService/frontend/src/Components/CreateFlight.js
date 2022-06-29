@@ -1,6 +1,5 @@
 import React from "react";
 import ReduxForm from "./ReduxForm";
-
 function CreateFlight() {
   return (
     <div>

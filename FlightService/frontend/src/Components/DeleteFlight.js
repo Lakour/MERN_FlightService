@@ -2,12 +2,12 @@ import React from 'react'
 import DeleteFlightForm from './DeleteFlightForm'
 import {useLocation} from 'react-router-dom';
 
-function DeleteFlight(props) {
+function DeleteFlight() {
 
   //retrieves current flight id to populate
   // input field with
   const location = useLocation();
-  const flightId = location.state.id;
+  const flightId = location.state?.id;
   
   return (
     <div>
