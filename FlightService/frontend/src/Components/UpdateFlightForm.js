@@ -1,20 +1,20 @@
 import axios from "axios";
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import {useNavigate} from 'react-router-dom'
 
 const UpdateFlightForm = props => {
-  // console.log( props.flightId );
-  const onSubmit = formValues => {
-    // console.log(props.flightId? props.flightId : formValues.flightId);
-    // console.log( formValues.property, formValues.propertyUpdate)
-    // console.log( props.flightId ?  props.flightId: formValues.flightId);
+  const navigate = useNavigate();
 
+
+  const onSubmit = formValues => {
     axios.patch(
       `http://localhost:8080/flight/update-flight/${props.flightId
         ? props.flightId
         : formValues.flightId}`,
-      { key: formValues.property, value: formValues.propertyUpdate }
-    );
+        { key: formValues.property, value: formValues.propertyUpdate }
+        );
+        navigate('/show')
   };
 
   const renderInputForId = formProps => {
@@ -53,9 +53,6 @@ const UpdateFlightForm = props => {
 
   return (
     <div  className="field">
-      {/* handleSubmit is a callback fcn provided by redux-form 
-      it automatically handles e.preventDefault()
-      */}
       <form onSubmit={props.handleSubmit(onSubmit)} className="ui form error">
         <Field
           name="flightId"

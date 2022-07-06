@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const flightController = require('../controllers/flight.controller');
 
+
+/**
+ * Retrives a list of all flights
+ */
 router.get('/', async (req, res)=>{
   try {
     const flightList = await flightController.getAllFlights()
@@ -11,6 +15,9 @@ router.get('/', async (req, res)=>{
  
 })
 
+/**
+ * Retrives a flight using its flightId
+ */
 router.get('/:id', async (req,res)=>{
   const flightId = req.params.id
   try{
@@ -21,8 +28,10 @@ router.get('/:id', async (req,res)=>{
   }
 })
 
+/**
+ * Creates a new flight 
+ */
 router.post('/create-flight',async (req, res)=>{
-  console.log(req.body)
   try{
     const flightId =  await flightController.createFlight(req.body)
     res.status(201).json(`New flight has been created with flight id: ${flightId}`)
@@ -32,6 +41,9 @@ router.post('/create-flight',async (req, res)=>{
 
 })
 
+/**
+ * Deletes the flight with flightId
+ */
 router.delete('/delete-flight/:id', async(req,res)=>{
   try{
   await flightController.deleteFlight(req.params.id)
@@ -41,10 +53,12 @@ router.delete('/delete-flight/:id', async(req,res)=>{
   }
 })
 
+/**
+ * Updates a property of a flight using flightId
+ */
 router.patch('/update-flight/:id', async (req,res)=>{
   const flightId = Number(req.params.id);
   const update = req.body;
-
   try{
    const flight = await flightController.updateFlight(flightId,update)
    res.status(200).json(`Flight's ${update.key} has been updated to ${flight[update.key]}`)

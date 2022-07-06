@@ -1,8 +1,12 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
+
  const DeleteFlightForm = (props)=>{
-  
+  const navigate = useNavigate();
+
+
 const renderInput = (formProps) =>{
   return(
     <div className='field'>
@@ -16,15 +20,13 @@ const renderInput = (formProps) =>{
         onChange={formProps.input.onChange}
         autoComplete="off"
       />
-      {/* {this.renderError(formProps.meta)} */}
     </div>
   );
 }
 
   const onSubmit = (formValues) => {
-  
-    console.log( props.flightId ?  props.flightId: formValues.flightId);
     axios.delete(`http://localhost:8080/flight/delete-flight/${ props.flightId ?  props.flightId: formValues.flightId}`)
+    navigate('/show')
   };
   
 

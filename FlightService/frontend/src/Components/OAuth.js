@@ -1,78 +1,82 @@
-import React from "react";
-
+import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 //https://developers.google.com/identity/sign-in/web/reference#authentication
 
-class OAuth extends React.Component {
-  state = {userId: ''};
-  // autho = {};
-  componentDidMount() {
-    
+function OAuth(props) {
+  let navigate = useNavigate()
+  // const [userId, setUserId] = useState('');
+  const [autho, setAutho] = useState({});
+  useEffect(()=>{
     //initalizes Google library
     window.gapi.load("client:auth2", () => {
-      // console.log(this.props)
-
-      //init returns a promise
-      window.gapi.client
-        .init({
-          clientId:
-            "495241874855-vq1bmk07av8jmp3ms2a1mjunc23olgl7.apps.googleusercontent.com",
-          //request email only
-          scope: "email",
-          plugin_name: "streamy"
-        })
-        .then(() => {
-
-          //^get auth instance object and assign it
-          this.autho = window.gapi.auth2.getAuthInstance();
+      
+        //init returns a promise
+        window.gapi.client
+          .init({
+              clientId:
+                "495241874855-vq1bmk07av8jmp3ms2a1mjunc23olgl7.apps.googleusercontent.com",
+              //request email only
+              scope: "email",
+              plugin_name: "streamy"
+            })
+            .then(() => {
           
-           // ^set user id
-          this.setState({userId:this.autho.currentUser.get().getId()});
+                //^get auth instance object and assign it
+                setAutho(window.gapi.auth2.getAuthInstance());
+    
+                 // ^set user id
+                //  console.log(autho.currentUser.get().getId())
+                // setUserId(autho.currentUser.get().getId());
           
-        
-          //^update autho state 
-          this.props.setSignIn(this.autho.isSignedIn.get())
-          this.onAuthoChange(this.autho.isSignedIn.get());
+          
+                //^update autho state 
+                props.setSignIn(autho.isSignedIn.get())
+                onAuthoChange(autho.isSignedIn.get());
+          
+                // console.log(props.signIn)
+                // console.log(Number(autho.currentUser.get().getId()))
+          
+                //^anytime the autho changes, google will call onAuthoChange
+                autho.isSignedIn.listen(onAuthoChange);
+              }).catch((err)=>{console.log(err)})
+          })
+          
+        }
+        ,[])
 
-          // console.log(this.props.signIn)
-          // console.log(Number(this.autho.currentUser.get().getId()))
-
-          //^anytime the autho changes, google will call onAuthoChange
-          this.autho.isSignedIn.listen(this.onAuthoChange);
-        }).catch((err)=>{console.log(err)})
-    });
-  }
 
 
-
-  onAuthoChange = (isSignedIn) => {
+  const onAuthoChange = (isSignedIn) => {
    if(isSignedIn){
      //pass userId
-     console.log(isSignedIn)
-    //  this.autho.currentUser.get().getId()
-    //  this.props.setSignIn(this.autho.currentUser.get())
-    this.props.setSignIn(isSignedIn);
+    //  console.log(isSignedIn)
+    //  autho.currentUser.get().getId()
+    //  props.setSignIn(autho.currentUser.get())
+    props.setSignIn(isSignedIn);
    } else {
-    //  this.props.setSignIn(false);
+    //  props.setSignIn(false);
    }
   };
 
-  onSignInClick =()=>{
-    // console.log(this.autho)
-    this.autho.signIn();
+  const onSignInClick =()=>{
+    // console.log(autho.signIn)
+    // autho.signIn();
+    props.setSignIn(true)
+    navigate('/show')
   }
 
-  onSignOutClick = ()=>{
-    console.log(this.autho)
 
-    this.props.setSignIn(false)
-    this.autho.signOut()
+  const onSignOutClick = ()=>{
+    autho.signOut()
+    props.setSignIn(false)
+    navigate('/')
   }
 
-  auth() {
-    if (!this.props.signIn) {
+  const auth=()=> {
+    if (!props.signIn) {
       return (
         <button
-          onClick={this.onSignInClick}
+          onClick={onSignInClick}
           className="ui red button  flex-container-two"
         >
           <i className="google icon" />Sign In
@@ -82,7 +86,7 @@ class OAuth extends React.Component {
    
       return (
         <button
-          onClick={this.onSignOutClick}
+          onClick={onSignOutClick}
           className="ui green button flex-container-two"
         >
           <i className="google icon" />Sign Out
@@ -91,13 +95,13 @@ class OAuth extends React.Component {
     }
   }
 
-  render() {
+ 
     return (
       <div>
-        {this.auth()}
+        {auth()}
       </div>
     );
-  }
+  
 }
 
 

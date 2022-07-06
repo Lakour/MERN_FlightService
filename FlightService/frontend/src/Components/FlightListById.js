@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 function ShowFlights(props) {
 
-
   function renderList() {
 
     return props.list.map(flight => {

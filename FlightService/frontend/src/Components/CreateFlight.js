@@ -1,9 +1,9 @@
 import React from "react";
-import ReduxForm from "./ReduxForm";
+import CreateFlightForm from "./CreateFlightForm";
 function CreateFlight() {
   return (
     <div>
-      <ReduxForm />
+      <CreateFlightForm />
     </div>
   );
 }

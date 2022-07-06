@@ -1,58 +1,13 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-// import {Link} from 'react-router-dom';
-import Flights from './Flights';
 import axios from "axios";
-import history from '../history';
-// import {useNavigate} from 'react-router-dom'
-import { withRouter } from "./withRouter";
-class ReduxForm extends React.Component {
+import { useNavigate } from "react-router-dom";
 
-  state = {redirect: false}
+const ReduxForm2 =(props)=> {
 
+  const navigate = useNavigate();
 
-  componentWillUnmount(){
-    console.log(this.props.submitFailed)
-    if(this.props.submitFailed){
-      this.setState({redirect: true})
-    }
-
-    }
-  
-    componentDidUpdate(){
-      // console.log(this.props.submitFailed)
-
-      // if(this.props.submitFailed){
-      //   this.setState({redirect: true})
-      // }
-    }
-    componentDidMount(){
-      // console.log(this.props.submitFailed)
-
-      this.setState({redirect: false});
-  }
-
-  // renderTimeInput = formProps => {
-  //   const className = `field ${formProps.meta.error && formProps.meta.touched
-  //     ? formProps.meta.error
-  //     : " "}`;
-  //     return (
-  //       <div className={className}>
-  //       <label>
-  //         {formProps.label}
-  //       </label>
-  //       <input
-  //       className=""
-  //       type="time"
-  //       value={formProps.input.value}
-  //       onChange={formProps.input.onChange}
-  //       // autoComplete="off"
-  //       />
-  //       {this.renderError(formProps.meta)}
-  //     </div>
-  //   );
-  // };
-  renderInput = formProps => {
+  const renderInput = formProps => {
     const className = `field ${formProps.meta.error && formProps.meta.touched
       ? formProps.meta.error
       : " "}`;
@@ -68,12 +23,12 @@ class ReduxForm extends React.Component {
         onChange={formProps.input.onChange}
         // autoComplete="off"
         />
-        {this.renderError(formProps.meta)}
+        {renderError(formProps.meta)}
       </div>
     );
   };
   
-  renderDateAndTimeInput = (formProps)=>{
+  const renderDateAndTimeInput = (formProps)=>{
     const className = `field ${formProps.meta.error && formProps.meta.touched
       ? formProps.meta.error
       : " "}`;
@@ -87,14 +42,13 @@ class ReduxForm extends React.Component {
           onChange={formProps.input.onChange}
           autoComplete="off"
           />
-        {this.renderError(formProps.meta)}
+        {renderError(formProps.meta)}
       </div>
     );
   }
   
-  renderError({ error, touched }) {
-    // console.log(error, touched)
-    
+  const renderError =({ error, touched })=> {
+ 
     if (touched && error) {
       return (
         <div className="ui error message">
@@ -108,91 +62,76 @@ class ReduxForm extends React.Component {
 
 
   //^formValues, object with all our values from the inputs
-  //setState does not work in here??!!!??????????
-  onSubmit(formValues) {
-  this.setState({redirect: true})
-console.log(formValues)
-    axios.post('http://localhost:8080/flight/create-flight', formValues)
+  const onSubmit=(formValues)=> {
 
-    //after new flight is created navigate to home page
+    axios.post('http://localhost:8080/flight/create-flight', formValues)
+    
+    navigate('/show');
 
   }
   
-  render() {
 
     return (
       <div>
-     {this.state.redirect ? 
-     <div>hello world
-
-       <Flights/>  
-     </div>
-      : 
-      <div>
         <form
         //^this.props is auto provided by redux-form
-          onSubmit={this.props.handleSubmit(this.onSubmit)}
+          onSubmit={props.handleSubmit(onSubmit)}
           className="ui form error"
         >
+            <h4 class="ui dividing header">Create A Flight</h4>
+          <div className="ui fluid icon input">
+
           {/* requird props are name and component */}
           <Field
             name="flightNumber"
             // ^component is needed to render the actual input
-            component={this.renderInput}
+            component={renderInput}
             label="Flight Number"
-          />
+            />
+          
           <Field
             name="departureDate"
-            component={this.renderDateAndTimeInput}
+            component={renderDateAndTimeInput}
             label="Departure Date"
           />
           <Field
             name="arrivalDate"
-            component={this.renderDateAndTimeInput}
+            component={renderDateAndTimeInput}
             label="Arrival Date"
           />
-          {/* <Field
-            name="departureTime"
-            component={this.renderTimeInput}
-            label="Departure Time"
-          />
-          <Field
-            name="arrivalTime"
-            component={this.renderTimeInput}
-            label="Arrival Time"
-          /> */}
           <Field
             name="departureAirport"
-            component={this.renderInput}
+            component={renderInput}
             label="Departure Airport"
           />
           <Field
             name="arrivalAirport"
-            component={this.renderInput}
+            component={renderInput}
             label="Arrival Airport"
           />
           <Field
             name="passengers"
-            component={this.renderInput}
-            label="Number of Passangers"
+            component={renderInput}
+            label="Passangers"
             type="number"
           />
           <Field
             name="passengerLimit"
-            component={this.renderInput}
+            component={renderInput}
             label="Passanger Limit"
             type="number"
 
           />
+            </div>
           <br />
           <button  id="btn" className="ui button primary">Submit</button>
         </form>
         </div>
-       } 
-      </div>
+     
+ 
     );
   }
-}
+
 
 const validate = formValues => {
  
@@ -205,12 +144,6 @@ const validate = formValues => {
   }
   if (!formValues.arrivalDate) {
     errors.arrivalDate = "You must enter an arrival date";
-  }
-  if (!formValues.departureTime) {
-    errors.departureTime = "You must enter a departure time";
-  }
-  if (!formValues.arrivalTime) {
-    errors.arrivalTime = "You must enter an arrival time";
   }
   if (!formValues.departureAirport) {
     errors.departureAirport = "You must enter a departure airport";
@@ -234,6 +167,6 @@ const validate = formValues => {
 };
 
 export default reduxForm({
-  form: "reduxForm",
+  form: "reduxForm2",
   validate: validate
-})(ReduxForm);
+})(ReduxForm2);

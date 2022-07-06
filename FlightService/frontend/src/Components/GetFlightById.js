@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import FlightList from "./FlightList";
+
+import FlightListById from './FlightListById'
 
 const GetFlightById = props => {
+  const navigate = useNavigate()
   const [redirect, setRedirect] = useState(false);
   const [flight, setFlight] = useState([]);
 
+
+
+  
   const renderInput = formProps => {
     return (
       <div className="field">
@@ -15,37 +20,38 @@ const GetFlightById = props => {
           {formProps.label}
         </label>
         <input
-          // placeholder={props.flightId}
           type="text"
           value={formProps.input.value}
           onChange={formProps.input.onChange}
           autoComplete="off"
         />
-        {/* {this.renderError(formProps.meta)} */}
       </div>
     );
   };
 
   const onSubmit = async formValues => {
-    const flight = await axios.get(
-      `http://localhost:8080/flight/${formValues.flightId}`
-    );
-    setFlight([flight.data]);
-    setRedirect(true);
-    //got to Flightlist and pass flight as a prop
-  };
+    try{
 
-  // useEffect(
-  //   () => {
-  //     console.log(flight);
-  //   },
-  //   [flight]
-  // );
+      const flight = await axios.get(
+        `http://localhost:8080/flight/${formValues.flightId}`
+        );
+        if(flight.data == null){
+          window.alert(`Flight with id: ${formValues.flightId} does not exist`)
+          navigate('/show-flight')
+        } else {
+          setFlight([flight.data]);
+          setRedirect(true);
+        }
+      } catch(err){
+        window.alert(`Error try again`)
+      }
+   
+  };
 
   return (
     <div>
       {redirect
-        ? <FlightList list={flight}/>
+        ? <FlightListById list={flight}/>
         : <form
             onSubmit={props.handleSubmit(onSubmit)}
             className="ui form error"

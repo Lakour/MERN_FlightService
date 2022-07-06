@@ -6,6 +6,8 @@ import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit'
 import reducers from './reducers/index'
+import * as themes from './theme/schema.json';
+import { setToLS } from './utils/storage';
 // import dotenv from 'dotenv';
 
 // import 'dotenv/config';
@@ -16,10 +18,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = configureStore({reducer: reducers});
 
+const Index = () => {
+  setToLS('all-themes', themes.default);
+  return(
+    <App />
+  )
+}
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+    <Index />
     </Provider>
   </React.StrictMode>
 );
@@ -28,3 +37,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
