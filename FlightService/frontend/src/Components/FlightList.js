@@ -15,8 +15,11 @@ function ShowFlights(props) {
             Flight
           </h4>
           <table className="ui definition table">
+            
             <tbody>
+              
               <tr>
+                
                 <td className="two wide column">Fligth Number</td>
                 <td>
                   {" "}{flight.flightNumber}
@@ -57,7 +60,9 @@ function ShowFlights(props) {
                 <td>
                   {flight.passengerLimit}
                 </td>
+                
               </tr>
+        
             </tbody>
           </table>
           <div className="edit-flight">
@@ -76,7 +81,6 @@ function ShowFlights(props) {
             <i className="edit icon" />
           </Link>
             </div>
-
         </div>
       );
     });

@@ -25,7 +25,7 @@ const UpdateFlightForm = props => {
         </label>
         <input
           type="text"
-          // value={formProps.input.value}
+          autoFocus="true"
           onChange={formProps.input.onChange}
           autoComplete="off"
           value={props.flightId ? props.flightId : formProps.input.value}

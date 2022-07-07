@@ -3,6 +3,12 @@ import { Field, reduxForm } from "redux-form";
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 
+/**
+ * 
+ * @param {*} props 
+ * @returns Nothing
+ * Renders form to delete only by flightId
+ */
  const DeleteFlightForm = (props)=>{
   const navigate = useNavigate();
 
@@ -19,6 +25,9 @@ const renderInput = (formProps) =>{
         value={props.flightId? props.flightId: formProps.input.value}
         onChange={formProps.input.onChange}
         autoComplete="off"
+        autoFocus="true"
+
+
       />
     </div>
   );

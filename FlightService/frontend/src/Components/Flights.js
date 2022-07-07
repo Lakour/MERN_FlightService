@@ -1,34 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-import FlightList from './FlightList';
+import FlightList from "./FlightList";
 
 function Flights(props) {
-
-  const [flightList, setFlightList] = useState([])
-
-
+  const [flightList, setFlightList] = useState([]);
 
   //make a call to get all flights
-  useEffect(()=>{
-    axios.get('http://localhost:8080/flight').then((flights)=>{
-      setFlightList(flights.data)
-    }).catch((err)=>{
-      console.log(err)
-    })
-  },[flightList])
-  
-
- 
-
-
+  useEffect(
+    () => {
+      axios
+        .get("http://localhost:8080/flight")
+        .then(flights => {
+          setFlightList(flights.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    [flightList]
+  );
 
   return (
-    <>
-    <FlightList list={flightList}/>
-  
-    </>
-  )
+    <div>
+      <FlightList list={flightList} />
+    </div>
+  );
 }
 
-export default Flights
+export default Flights;

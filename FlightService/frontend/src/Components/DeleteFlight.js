@@ -2,6 +2,10 @@ import React from 'react'
 import DeleteFlightForm from './DeleteFlightForm'
 import {useLocation} from 'react-router-dom';
 
+/**
+ * 
+ * @returns Delete Flight Form
+ */
 function DeleteFlight() {
 
   //retrieves current flight id to populate

@@ -24,6 +24,7 @@ const GetFlightById = props => {
           value={formProps.input.value}
           onChange={formProps.input.onChange}
           autoComplete="off"
+          autoFocus="true"
         />
       </div>
     );
@@ -56,13 +57,16 @@ const GetFlightById = props => {
             onSubmit={props.handleSubmit(onSubmit)}
             className="ui form error"
           >
+            <div className="ui fluid icon input">
+
             {/* requird props are name and component */}
             <Field
               name="flightId"
               // component is needed to render the actual field
               component={renderInput}
               label="Enter Flight Id"
-            />
+              />
+              </div>
 
             <button  id="btn" className="ui button primary">Submit</button>
           </form>}

@@ -3,7 +3,14 @@ import { Field, reduxForm } from "redux-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const ReduxForm2 =(props)=> {
+
+/**
+ * 
+ * @param {*} props 
+ * @returns Nothing
+ * Renders form to add a flight to the database
+ */
+const CreateFlightForm =(props)=> {
 
   const navigate = useNavigate();
 
@@ -169,4 +176,4 @@ const validate = formValues => {
 export default reduxForm({
   form: "reduxForm2",
   validate: validate
-})(ReduxForm2);
+})(CreateFlightForm);
