@@ -19,10 +19,12 @@ import WebFont from 'webfontloader';
 import { GlobalStyles } from './theme/GlobalStyles';
 import {useTheme} from './theme/useTheme';
 import ThemeSelector from './theme/ThemeSelector';
- //Create a cotainer
+
+
 const Container = styled.div`
   margin: 5px auto 5px auto;
 `;
+
 function App() {
   const {theme, themeLoaded, getFonts} = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
@@ -34,7 +36,7 @@ function App() {
    }, [themeLoaded]);
 
 
-  // 4: Load all the fonts
+  // Load all the fonts
   useEffect(() => {
     WebFont.load({
       google: {
@@ -95,46 +97,6 @@ function App() {
   );
 }
 
-
-  // return (
-  //   <>
-  //   <BrowserRouter history={history}>
- 
-  //    <Navbar 
-  //    navItemOne="Create A Flight" 
-  //    navItemTwo="Show All Flights" 
-  //    navItemThree="Update A Flight"
-  //    navItemFour="Delete A Flight"
-  //    navItemFive="Show Flight By Id"
-  //    signInStatus={signIn}
-  //    setSignInStatus={setSignIn}
-  //    />
-
-  //     <div>
-  //   <Routes>
-  //     {signIn ? 
-  //     <>
-  //   <Route exact path='/create' element={<CreateFlight/>}></Route>
-  //   <Route exact path='/update' element={<UpdateFlight/>}></Route>
-  //   <Route exact path='/delete' element={<DeleteFlight/>}></Route>
-  //   <Route exact path="/show-flight" element={<GetFlightById/>}></Route>
-  //   <Route exact path='/show' element={<Flights/>}></Route>   
-  //   <Route exact path='/show-flight-id' element={<FlightListById/>}></Route>
-    
-    
-
-
-  //     </>
-  //  : 
-  //  <Route path='/' element={<Home/>}></Route>
-  //  } 
-  //   </Routes>
-  //     </div>
-  //    {/* <button onClick={changeThemes}>Theme</button>  */}
-  //   </BrowserRouter> 
-
-  // </>
-  // );
 
 
 export default App;
