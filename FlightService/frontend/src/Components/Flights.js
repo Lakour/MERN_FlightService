@@ -3,7 +3,7 @@ import axios from "axios";
 
 import FlightList from "./FlightList";
 
-function Flights(props) {
+function Flights() {
   const [flightList, setFlightList] = useState([]);
 
   //make a call to get all flights

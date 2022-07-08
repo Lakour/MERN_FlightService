@@ -47,13 +47,13 @@ function App() {
 
 
   return (
-    <div>
+    <>
     {
       themeLoaded && <ThemeProvider theme={ selectedTheme }>
         <GlobalStyles/>
 
         <Container style={{fontFamily: selectedTheme.font}}>
-        <>
+        <div>
     <BrowserRouter history={history}>
  
      <Navbar 
@@ -88,12 +88,12 @@ function App() {
   } 
     </div>
     </BrowserRouter> 
-  </>
+  </div>
 
         </Container>
       </ThemeProvider>
     }
-    </div>
+    </>
   );
 }
 

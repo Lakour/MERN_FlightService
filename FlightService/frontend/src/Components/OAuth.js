@@ -6,6 +6,7 @@ function OAuth(props) {
   let navigate = useNavigate();
   // const [userId, setUserId] = useState('');
   const [autho, setAutho] = useState({});
+
   useEffect(() => {
     //initalizes Google library
     window.gapi.load("client:auth2", () => {
@@ -22,17 +23,18 @@ function OAuth(props) {
           //^get auth instance object and assign it
           setAutho(window.gapi.auth2.getAuthInstance());
 
-          // ^set user id
-          //  console.log(autho.currentUser.get().getId())
-          // setUserId(autho.currentUser.get().getId());
-
+          
           //^update autho state
           props.setSignIn(autho.isSignedIn.get());
           onAuthoChange(autho.isSignedIn.get());
-
-          // console.log(props.signIn)
-          // console.log(Number(autho.currentUser.get().getId()))
-
+          
+          // ^set user id in local storage
+          // console.log(autho.currentUser.get().getId( ))
+          const googleUserId = autho.currentUser.get().getId( )
+          localStorage.setItem("googleUserId",googleUserId);
+          //  console.log(autho.currentUser.get().getId())
+          // setUserId(autho.currentUser.get().getId());
+          
           //^anytime the autho changes, google will call onAuthoChange
           autho.isSignedIn.listen(onAuthoChange);
         })
@@ -45,7 +47,7 @@ function OAuth(props) {
   const onAuthoChange = isSignedIn => {
     if (isSignedIn) {
       //  autho.currentUser.get().getId()
-      props.setSignIn(autho.currentUser.get());
+      // props.setSignIn(autho.currentUser.get());
       props.setSignIn(isSignedIn);
     } else {
       props.setSignIn(false);

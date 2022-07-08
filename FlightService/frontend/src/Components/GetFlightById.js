@@ -24,7 +24,7 @@ const GetFlightById = props => {
           value={formProps.input.value}
           onChange={formProps.input.onChange}
           autoComplete="off"
-          autoFocus="true"
+          autoFocus={true}
         />
       </div>
     );
@@ -50,7 +50,7 @@ const GetFlightById = props => {
   };
 
   return (
-    <div>
+    <div className="flightId-form">
       {redirect
         ? <FlightListById list={flight}/>
         : <form

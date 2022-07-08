@@ -1,13 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ShowFlights(props) {
-
-
+function FlightList(props) {
   function renderList() {
-
     return props.list.map(flight => {
-
       return (
         <div className="ui container" key={flight._id}>
           <h4 className="ui horizontal divider header">
@@ -15,20 +11,17 @@ function ShowFlights(props) {
             Flight
           </h4>
           <table className="ui definition table">
-            
             <tbody>
-              
               <tr>
-                
                 <td className="two wide column">Fligth Number</td>
                 <td>
-                  {" "}{flight.flightNumber}
+                 {flight.flightNumber}
                 </td>
               </tr>
               <tr>
                 <td>Arrival Airport</td>
                 <td>
-                  {" "}{flight.arrivalAirport}
+                 {flight.arrivalAirport}
                 </td>
               </tr>
               <tr>
@@ -40,6 +33,7 @@ function ShowFlights(props) {
               <tr>
                 <td>Departure Time</td>
                 <td>
+                  {/* saved space in the db by just getting time from datetime input */}
                   {flight.departureDate.split("T")[1].split(".")[0]}
                 </td>
               </tr>
@@ -60,27 +54,25 @@ function ShowFlights(props) {
                 <td>
                   {flight.passengerLimit}
                 </td>
-                
               </tr>
-        
             </tbody>
           </table>
           <div className="edit-flight">
-          <Link
-            className="mini ui red button"
-            to="/delete"
-            state={{ id: flight.flightId }}
+            <Link
+              className="mini ui red button"
+              to="/delete"
+              state={{ id: flight.flightId }}
             >
-            <i className="delete icon" />
-          </Link>
-          <Link
-            className="mini ui yellow button"
-            to="/update"
-            state={{ id: flight.flightId }}
+              <i className="delete icon" />
+            </Link>
+            <Link
+              className="mini ui yellow button"
+              to="/update"
+              state={{ id: flight.flightId }}
             >
-            <i className="edit icon" />
-          </Link>
-            </div>
+              <i className="edit icon" />
+            </Link>
+          </div>
         </div>
       );
     });
@@ -93,4 +85,4 @@ function ShowFlights(props) {
   );
 }
 
-export default ShowFlights;
+export default FlightList;

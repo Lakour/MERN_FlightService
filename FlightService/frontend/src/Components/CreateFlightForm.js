@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 /**
  * 
  * @param {*} props 
- * @returns Nothing
+ * @returns Form with field properties
  * Renders form to add a flight to the database
  */
 const CreateFlightForm =(props)=> {
@@ -24,11 +24,9 @@ const CreateFlightForm =(props)=> {
           {formProps.label}
         </label>
         <input
-        className=""
         type="text"
         value={formProps.input.value}
         onChange={formProps.input.onChange}
-        // autoComplete="off"
         />
         {renderError(formProps.meta)}
       </div>
@@ -85,7 +83,7 @@ const CreateFlightForm =(props)=> {
           onSubmit={props.handleSubmit(onSubmit)}
           className="ui form error"
         >
-            <h4 class="ui dividing header">Create A Flight</h4>
+            <h4 className="ui dividing header">Create A Flight</h4>
           <div className="ui fluid icon input">
 
           {/* requird props are name and component */}
@@ -174,6 +172,6 @@ const validate = formValues => {
 };
 
 export default reduxForm({
-  form: "reduxForm2",
+  form: "createFlight",
   validate: validate
 })(CreateFlightForm);

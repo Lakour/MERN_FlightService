@@ -25,7 +25,7 @@ const UpdateFlightForm = props => {
         </label>
         <input
           type="text"
-          autoFocus="true"
+          autoFocus={true}
           onChange={formProps.input.onChange}
           autoComplete="off"
           value={props.flightId ? props.flightId : formProps.input.value}
@@ -88,5 +88,5 @@ const UpdateFlightForm = props => {
 };
 
 export default reduxForm({
-  form: "updateFlightForm"
+  form: "updateFligh"
 })(UpdateFlightForm);

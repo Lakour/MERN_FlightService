@@ -25,7 +25,7 @@ const renderInput = (formProps) =>{
         value={props.flightId? props.flightId: formProps.input.value}
         onChange={formProps.input.onChange}
         autoComplete="off"
-        autoFocus="true"
+        autoFocus={true}
 
 
       />
@@ -61,5 +61,5 @@ const renderInput = (formProps) =>{
 
 
 export default reduxForm({
-  form: "deleteFlightForm"
+  form: "deleteFlight"
 })(DeleteFlightForm);
